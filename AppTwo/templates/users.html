@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block body_block %}
+
+      <h2>Listado de Clientes</h2>
+
+    <div class="container pt-5" >
+
+      {% if user_list %}
+        <table class="table table-hover w-auto">
+          <thead >
+            <th >First Name</th>
+            <th >Last Name</th>
+            <th >Email</th>
+            <th >Action</th>
+
+          </thead>
+
+          {% for user in user_list %}
+          <tr>
+              <td>{{user.first_name}}</td>
+              <td>{{user.last_name}}</td>
+              <td>{{user.email}}</td>
+              <td><a class="btn btn-primary btn-sm" href="{% url 'views.edit' first_name=user.first_name last_name=user.last_name %}" role="button">Edit</a></td>
+
+          </tr>
+          {% endfor %}
+
+        </table>
+        {% endif %}
+      </div>
+  {% endblock %}
