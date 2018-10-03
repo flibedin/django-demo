@@ -27,7 +27,7 @@ SECRET_KEY = ')$ceq3xtd48v(3&b=1lb!l2=pzx8o3d=l$$r0rkg%gtdsj3pv+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['flibedinsky.pythonanywhere.com']
 
 
 # Application definition
