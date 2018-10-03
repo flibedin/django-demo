@@ -9,14 +9,13 @@
      <h1>Registrese aca! </h1>
      <h3>Llene el formulario: </h3>
 
-     <form enctype="multipart/form-data" method="post">
+     <form class="form-group" enctype="multipart/form-data" method="post">
        {% csrf_token %}
        {{ user_form.as_p }}
        {{ profile_form.as_p }}
-       <input type="submit" name="" value="Register">
+       <input type="submit" class="btn btn-primary btn-sm" name="" value="Register">
 
      </form>
-
    {% endif %}
 
 </div>

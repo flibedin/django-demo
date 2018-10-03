@@ -1,9 +1,15 @@
 <!DOCTYPE html>
+
 {% extends "base.html" %}
 {% block body_block %}
+{% load static %}
 
    <div class="jumbotron" >
-    <h1>Pagina de inicio!</h1>
+    <h1>Pagina de inicio de sitios en Django</h1>
+    <h2>Autor: Fernando Libedinsky
+    <a href="https://www.linkedin.com/in/fernandolibedinsky/"><img src="{% static "AppTwo/linkedin.png" %}" alt="linkedin" target="_blank"></a></h2>
+
+    <p>Esta pagina solo tiene por objeto mostrar un sitio web construido con Django</p>
     </div>
 
 {% endblock %}

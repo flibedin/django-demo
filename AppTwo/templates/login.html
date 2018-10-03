@@ -6,15 +6,16 @@
 
      <h1>Please Login here</h1>
 
-     <form action={% url 'user_login' %} method="post">
+
+     <form class="form-inline" action={% url 'user_login' %} method="post">
        {% csrf_token %}
-       <label for="username">Username:</label>
-       <input type="text" name="username" placeholder="Enter username">
+       <label class="form-control" for="username">Username:</label>
+       <input class="form-control" type="text" name="username" placeholder="Enter username">
 
-       <label for="password">Password:</label>
-       <input type="password" name="password">
+       <label class="form-control" for="password">Password:</label>
+       <input class="form-control" type="password" name="password">
 
-       <input type="submit" name="" value="Login">
+       <input class="btn btn-primary btn-sm" type="submit" name="" value="Login">
 
      </form>
 
