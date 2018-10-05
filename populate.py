@@ -9,6 +9,7 @@ django.setup()
 # ahora lo necesario para acceder al modelo y a la lib Faker
 import random
 from school.models import  School, Student
+from AppTwo.models import Cliente
 from faker import Faker
 
 fakegen = Faker()
@@ -23,8 +24,8 @@ def populate_users( N = 5 ):
         fake_last = fakegen.last_name()
         fake_email = fakegen.email()
 
-        # creo el User
-        webpg = User.objects.get_or_create( first_name = fake_first, last_name = fake_last,email = fake_email)[0]
+        # creo el Cliente
+        webpg = Cliente.objects.get_or_create( first_name = fake_first, last_name = fake_last,email = fake_email)[0]
 
 
 def populate_schools( N = 5, students = 10 ):
@@ -46,6 +47,6 @@ def populate_schools( N = 5, students = 10 ):
 
 if __name__ == '__main__':
     print( "Populating data")
-    # populate_users(20)
+    populate_users(20)
     populate_schools(10, 50)
     print( "Listo!")
