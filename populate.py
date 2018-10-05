@@ -14,7 +14,7 @@ from faker import Faker
 
 fakegen = Faker()
 
-
+# pueblo la lista de cliente
 def populate_users( N = 5 ):
 
     for entry in range(N):
