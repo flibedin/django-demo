@@ -2,15 +2,13 @@
 {% block body_block %}
 
 <h3>Listado de Escuelas</h3>
-    <div class="container pt-3">
 
-    <table class="table table-striped w-50">
+<div class="container pt-3">
+    <ul class="list-group ">
         {% for school in schools %}
-        <tr>
-          <td><a href="{{ school.id }}">{{ school.name }} </a></td>
-        </tr>
+          <li class="list-group-item"><a href="{{ school.id }}">{{ school.name }} </a></li>
         {% endfor %}
-    </table>
+    </ul>
 
 </div>
 {% endblock %}
