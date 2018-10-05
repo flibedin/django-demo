@@ -11,7 +11,7 @@ class Cliente( models.Model):
         return self.first_name + " " +  self.last_name
 
 class UserProfileInfo( models.Model ):
-    user = models.OneToOneField( User, on_delete=True )
+    user = models.OneToOneField( User, on_delete=models.CASCADE )
 
     portfolio = models.URLField( blank=True )
     profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
