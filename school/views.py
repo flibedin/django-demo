@@ -12,12 +12,12 @@ class SchoolListView( ListView ):
     model = models.School
 
 class SchoolCreateView( CreateView ):
-    fields = ( 'name', 'principal', 'location')
+    fields = ( 'name', 'principal', 'location', 'region')
     model = models.School
     template_name = 'school_form.html'
 
 class SchoolUpdateView( UpdateView ):
-    fields = ( 'name', 'principal')
+    fields = ( 'name', 'principal', 'region')
     model = models.School
     template_name = 'school_form.html'
 

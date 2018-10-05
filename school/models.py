@@ -6,6 +6,7 @@ class School(models.Model):
     name = models.CharField(max_length=256)
     principal = models.CharField(max_length=256)
     location = models.CharField(max_length=256)
+    region = models.IntegerField(null=True)
 
     def __str__(self):
         return self.name
