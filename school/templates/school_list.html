@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block body_block %}
+
+<h2>Listado de Escuelas</h4>
+    <div class="container pt-3">
+
+    <table class="table table-striped w-50">
+        {% for school in schools %}
+        <tr>
+          <td><a href="{{ school.id }}">{{ school.name }} </a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+{% endblock %}

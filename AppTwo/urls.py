@@ -1,9 +1,11 @@
 from django.urls import path
-from . import views
+from AppTwo import views
+
+app_name = 'AppTwo'
 
 urlpatterns = [
-    path('', views.users, name='views.users'),
-    path('<first_name>-<last_name>/edit/', views.edit, name='views.edit'),
-    path('edit/', views.edit, name='views.edit'),
+    path('', views.users, name='users'),
+    path('<first_name>-<last_name>/edit/', views.edit, name='edit'),
+    path('edit/', views.edit, name='edit'),
     path('special/', views.special, name='views.special'),
     ]

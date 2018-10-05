@@ -2,13 +2,13 @@
 {% extends "base.html" %}
 {% block body_block %}
 
-   <div class="container" >
+   <div class="container w-50 m-4" >
 
-    <form  class="form-group" action="{% url 'views.edit' %}" method="post">
+    <form  class="form-group"  method="post">
       {% csrf_token %}
       {{ form }}
       <div class="container">
-        <button type="submit" class="btn btn-primary btn-sm">Grabar</button>
+        <button type="submit" class="btn btn-primary btn-sm mt-3">Grabar</button>
       </div>
     </form>
 

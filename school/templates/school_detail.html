@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block body_block %}
+
+   <h5>Escuela:</h5>
+   <div class="container pt-2 pb-4 pl-4" >
+
+     <ul class="list-group">
+       <li>Nombre: {{ school_detail.name }}</li>
+       <li>Principal: {{ school_detail.principal }}</li>
+       <li>Location: {{ school_detail.location }}</li>
+     </ul>
+
+       <p><a class="btn btn-warning mt-3" href="{% url 'school:update' pk=school_detail.pk %}">Actualizar</a>
+       <a class="btn btn-danger mt-3 ml-3" href="{% url 'school:delete' pk=school_detail.pk %}">Borrar</a>  </p>
+
+   </div>
+
+    <h5>Nomina de Estudiantes: </h5>
+
+    <table class="table table-hover w-auto m-3">
+      <thead >
+        <th >Nombre</th>
+        <th >Edad</th>
+      </thead>
+
+    {% for student in school_detail.students.all %}
+    <tr>
+      <td>{{ student.name }}</td>
+      <td>{{ student.age }}</td>
+    </tr>
+
+    {% endfor %}
+  </table>
+
+
+{% endblock %}

@@ -2,13 +2,12 @@
 {% extends "base.html" %}
 {% block body_block %}
 
-<div class="jumbotron">
   {% if registered %}
-    <h1>Gracias por Registrarse! </h1>
+    <h3>Gracias por Registrarse! </h3>
   {% else %}
-     <h1>Registrese aca! </h1>
-     <h3>Llene el formulario: </h3>
+     <h3>Registrese aca! </h3>
 
+     <div class="container w-50 m-4" >
      <form class="form-group" enctype="multipart/form-data" method="post">
        {% csrf_token %}
        {{ user_form.as_p }}
@@ -16,8 +15,7 @@
        <input type="submit" class="btn btn-primary btn-sm" name="" value="Register">
 
      </form>
+   </div>
    {% endif %}
-
-</div>
 
 {% endblock %}

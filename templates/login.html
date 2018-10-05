@@ -2,23 +2,22 @@
 {% extends "base.html" %}
 {% block body_block %}
 
-<div class="jumbotron">
+     <h3>Please Login here</h3>
 
-     <h1>Please Login here</h1>
-
-
-     <form class="form-inline" action={% url 'user_login' %} method="post">
+     <div class="container pt-3 w-50 ml-4 " >
+     <form class="form-group" action={% url 'user_login' %} method="post">
        {% csrf_token %}
        <label class="form-control" for="username">Username:</label>
        <input class="form-control" type="text" name="username" placeholder="Enter username">
 
-       <label class="form-control" for="password">Password:</label>
+       <label class="form-control mt-3" for="password">Password:</label>
        <input class="form-control" type="password" name="password">
 
-       <input class="btn btn-primary btn-sm" type="submit" name="" value="Login">
+       <input class="btn btn-primary btn-sm mt-3" type="submit" name="" value="Login">
 
      </form>
+   </div>
 
-</div>
+
 
 {% endblock %}

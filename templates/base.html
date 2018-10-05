@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 
+
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -24,13 +25,13 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Clientes
+          Aplicaciones
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'views.edit' %}">Nuevo Cliente</a>
-          <a class="dropdown-item" href="{% url 'views.users' %}">Lista de Clientes</a>
+          <a class="dropdown-item" href="{% url 'AppTwo:edit' %}">Nuevo Cliente</a>
+          <a class="dropdown-item" href="{% url 'AppTwo:users' %}">Lista de Clientes</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Reporte de Compras</a>
+          <a class="dropdown-item" href="{% url 'school:list' %}">Escuelas</a>
         </div>
       </li>
       <li class="nav-item"><a class="nav-link" href="{% url 'views.register' %}">Registro</a></li>

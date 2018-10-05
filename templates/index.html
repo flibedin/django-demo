@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+   <div class="jumbotron" >
+    <h4>Pagina de inicio de sitios en Django</h4>
+    <p>Autor: Fernando Libedinsky
+    <a href="https://www.linkedin.com/in/fernandolibedinsky/"><img style="width:5%" src="{% static 'linkedin.png' %}" alt="linkedin" target="_blank"></a>
+  </p>
+    <p>Este sitio corresponde a dos aplicaciones construidas con Django Framework y Python</p>
+    <p>Se utilizan dos bases de modelos de datos: clientes y escuelas</p>
+    <p>Se utiliza el mecanismo de seguridad de Django para registrar y autentificar usuarios</p>
+
+  </div>
+
+{% endblock %}
