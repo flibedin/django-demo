@@ -4,7 +4,7 @@
 <h3>Listado de Escuelas</h3>
 
 <div class="container pt-3">
-    <ul class="list-group ">
+    <ul class="list-group  w-50">
         {% for school in schools %}
           <li class="list-group-item"><a href="{{ school.id }}">{{ school.name }} </a></li>
         {% endfor %}

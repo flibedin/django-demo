@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from AppTwo import views
+from django.conf import settings
+from django.conf.urls.static import static
+from AppTwo import views, auth_views
 
 urlpatterns = [
     path( '', views.index, name='views.index'),
@@ -23,8 +25,12 @@ urlpatterns = [
     path( 'school/', include('school.urls')),
 
     path('admin/', admin.site.urls),
-    path('register/', views.register, name='views.register'),
-    path('logout/', views.user_logout, name='logout'),
-    path('user_login/', views.user_login, name='user_login'),
+    path('register/', auth_views.register, name='views.register'),
+    path('logout/', auth_views.user_logout, name='logout'),
+    path('user_login/', auth_views.user_login, name='user_login'),
+    path('user_detail/', auth_views.user_detail, name='user_detail'),
+    path('user_edit/', auth_views.user_edit, name='user_edit'),
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

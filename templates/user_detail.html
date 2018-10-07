@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block body_block %}
+
+   <div class="container pt-3">
+     <div class="row">
+
+     <div class="col-sm-3">
+       <img class="rounded float-left w-50" src="{{ user_profile.profile_pic.url }}" alt="{{ user_profile.user.username }}">
+     </div>
+
+       <div class="col-sm-9">
+
+         <ul class="list-group float-left pl-0">
+           <li>Username: {{ user_profile.user.username }}</li>
+           <li>Nombre: {{ user_profile.user.first_name }}</li>
+           <li>Apellido: {{ user_profile.user.last_name }}</li>
+
+           <li>Email: {{ user_profile.user.email }}</li>
+           <li>Portfolio: {{ user_profile.portfolio }}</li>
+         </ul>
+       </div>
+   </div>
+ </div>
+
+   <div class="container pt-3 pb-4 pl-4" >
+
+     <p><a class="btn btn-primary mt-3 btn-sm" href="{% url 'user_edit' %}">Editar</a>
+     <a class="btn btn-warning mt-3 ml-4 btn-sm" href="#">Cambiar Password</a>
+     </p>
+
+   </div>
+
+{% endblock %}
