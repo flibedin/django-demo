@@ -4,6 +4,9 @@ from AppTwo.models import Cliente
 from AppTwo.forms import ClienteForm
 from django.urls  import reverse
 from django.contrib.auth.decorators import login_required
+from django.views.generic import (
+            View, TemplateView, ListView, DetailView,
+            CreateView, UpdateView, DeleteView)
 
 # Create your views here.
 def index( request ):
@@ -63,3 +66,9 @@ def edit( request, pk = None):
 @login_required
 def special( request ):
     return HttpResponse( "Estas logged in, nice!")
+
+class EmpresaView(TemplateView):
+    template_name = 'empresa.html'
+
+class ProductosView(TemplateView):
+    template_name = 'productos.html'

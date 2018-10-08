@@ -3,15 +3,28 @@
 
 {% block body_block %}
 
-   <div class="jumbotron" >
-    <h4>Pagina de inicio de sitios en Django</h4>
+    <div class="row pt-5">
+    <div class="col-sm-8">
+
+    <h5 class="pl-4 pb-3">Ejemplo de un sitio construido con Django</h5>
     <p>Autor: Fernando Libedinsky
     <a href="https://www.linkedin.com/in/fernandolibedinsky/"><img style="width:5%" src="{% static 'linkedin.png' %}" alt="linkedin" target="_blank"></a>
   </p>
     <p>Este sitio corresponde a dos aplicaciones construidas con Django Framework y Python</p>
-    <p>Se utilizan dos bases de modelos de datos: clientes y escuelas</p>
-    <p>Se utiliza el mecanismo de seguridad de Django para registrar y autentificar usuarios</p>
+    <p>Se utilizan dos bases de modelos de datos: </p>
+    <ul>
+      <li><a href="{% url 'AppTwo:users'%}">Clientes</a> (Requiere <a href="{% url 'user_login' %}">login</a>)</li>
+      <li><a href="{% url 'school:list'%}">Escuelas</a></li>
+    </ul>
+    <p>Se integra el mecanismo de seguridad de Django para <a href="{% url 'user_login' %}">autentificar</a> usuarios
+      y <a href="{% url 'views.register' %}">registrar usuarios nuevos</a></p>
     <p>Octubre, 2018</p>
+    </div>
+
+    <div class="col-sm-4">
+      <img class="rounded float-right w-50" src="{% static 'django.png' %}" alt="">
+    </div>
+
 
   </div>
 

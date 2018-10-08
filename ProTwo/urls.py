@@ -30,6 +30,10 @@ urlpatterns = [
     path('user_login/', auth_views.user_login, name='user_login'),
     path('user_detail/', auth_views.user_detail, name='user_detail'),
     path('user_edit/', auth_views.user_edit, name='user_edit'),
+    path('empresa/$',views.EmpresaView.as_view(),name='empresa'),
+    path('productos/$',views.ProductosView.as_view(),name='productos'),
+
+
 
 ]
 

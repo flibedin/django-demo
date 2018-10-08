@@ -17,29 +17,29 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto ">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Empresa <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'empresa' %}">Empresa <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Productos</a>
+        <a class="nav-link" href="{% url 'productos' %}">Productos</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Aplicaciones
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="{% url 'AppTwo:edit' %}">Nuevo Cliente</a>
-          <a class="dropdown-item" href="{% url 'AppTwo:users' %}">Lista de Clientes</a>
+          <a class="dropdown-item" href="{% url 'AppTwo:users' %}">Clientes</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{% url 'school:list' %}">Escuelas</a>
         </div>
       </li>
     </ul>
 
-    <!--   buscador por ahora comentado -->
+    <!--   buscador por ahora comentado
     <form class="form-inline my-2 ml-5 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-success  my-2 my-sm-0 btn-sm" type="submit">Search</button>
-    </form>
+    </form> -->
+
 
 
     <ul class="navbar-nav ml-auto pr-5">
