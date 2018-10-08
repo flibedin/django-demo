@@ -89,20 +89,8 @@ def user_edit( request ):
             u.first_name = user_form.cleaned_data['first_name']
             u.last_name = user_form.cleaned_data['last_name']
             u.email = user_form.cleaned_data['email']
+
             u.save()
-
-
-
-            '''
-            profile = profile_form.save( commit = False)
-            profile.user = user         # lo asocio al user recien grabado
-
-            # veo si trae una imagen
-            if 'profile_pic' in request.FILES :
-                profile.profile_pic = request.FILES['profile_pic']
-
-            profile.save()
-            '''
 
             # lo retorno a la vista original
             return HttpResponseRedirect( reverse('user_detail'))

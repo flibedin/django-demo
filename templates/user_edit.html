@@ -4,9 +4,11 @@
    <div class="container pt-3">
      <div class="row">
 
+{% if user_profile.profile_pic.url != '' and user_profile.profile_pic.url != None %}
      <div class="col-sm-3">
        <img class="rounded float-left w-50" src="{{ user_profile.profile_pic.url }}" alt="{{ user_profile.user.username }}">
      </div>
+{% endif %}
 
        <div class="col-sm-5">
 
