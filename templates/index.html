@@ -1,17 +1,17 @@
 {% extends "base.html" %}
-{% load staticfiles %}
+<!-- {% load staticfiles %} -->
 
 {% block body_block %}
 
-    <div class="row pt-5">
+    <div class="row pt-3">
     <div class="col-sm-8">
 
-    <h5 class="pl-4 pb-3">Ejemplo de un sitio construido con Django</h5>
+    <h5 class="pl-2 pb-3">Ejemplo de un sitio construido con Django</h5>
     <p>Autor: Fernando Libedinsky
     <a href="https://www.linkedin.com/in/fernandolibedinsky/"><img style="width:5%" src="{% static 'linkedin.png' %}" alt="linkedin" target="_blank"></a>
   </p>
-    <p>Este sitio corresponde a dos aplicaciones construidas con Django Framework y Python</p>
-    <p>Se utilizan dos bases de modelos de datos: </p>
+    <p>Este sitio corresponde a dos aplicaciones construidas con Django Framework y Python.
+    Se utilizan dos bases de datos: </p>
     <ul>
       <li><a href="{% url 'AppTwo:users'%}">Clientes</a> (Requiere <a href="{% url 'user_login' %}">login</a>)</li>
       <li><a href="{% url 'school:list'%}">Escuelas</a></li>

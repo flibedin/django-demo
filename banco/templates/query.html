@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% block body_block %}
+
+<h3>Banco - <small>Consulta de Transacciones </small></h3>
+
+
+<div class="container pt-3 " >
+
+ <form class="form-group col-sm-4"  method="post">
+   {% csrf_token %}
+   {% bootstrap_form form layout='horizontal' size='small' %}
+   <div class="container">
+     <button type="submit" class="btn btn-primary btn-sm mt-3">Consultar</button>
+   </div>
+ </form>
+
+ </div>
+
+
+<div class="container pt-3">
+    <table class="table table-hover w-auto">
+    <thead >
+        <th >Nombre</th>
+        <th >Genero</th>
+        <th >Fecha</th>
+        <th >Tipo</th>
+        <th >Monto</th>
+      </thead>
+
+        {% for t in txs %}
+        <tr>
+          <td>{{ t.cliente.nombre }} {{ t.cliente.apellido }}</td>
+          <td>{{t.cliente.get_sexo_display }}</td>
+          <td>{{ t.fecha|date:"d/m/Y" }}</td>
+          <td>{{ t.get_tipo_display }}</td>
+          <td>{{ t.monto }}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+</div>
+{% endblock %}

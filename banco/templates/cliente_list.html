@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block body_block %}
+
+<h3>Banco - <small>Listado de Clientes </small></h3>
+
+
+<div class="container pt-3">
+    <ul class="list-group  w-50">
+        {% for c in clientes %}
+          <li class="list-group-item"><a href="{{ c.pk }}">{{ c.nombre }} {{ c.apellido }}</a></li>
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}
