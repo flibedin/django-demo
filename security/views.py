@@ -1,10 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from AppTwo.models import  UserProfileInfo
-from AppTwo.forms import  UserForm, UserProfileInfoForm, UserFullForm
+from security.models import  UserProfileInfo
+from security.forms import  UserForm, UserProfileInfoForm, UserFullForm
 from django.urls  import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.conf import settings
+import json
+import urllib
+
 
 
 # Registro de un nuevo usuario
@@ -47,6 +51,22 @@ def user_login( request ):
         username = request.POST.get( 'username')
         password = request.POST.get( 'password')
 
+        ''' Begin reCAPTCHA validation '''
+        recaptcha_response = request.POST.get('g-recaptcha-response')
+        url = 'https://www.google.com/recaptcha/api/siteverify'
+        values = {
+            'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+            'response': recaptcha_response
+        }
+        data = urllib.parse.urlencode(values).encode()
+        req =  urllib.request.Request(url, data=data)
+        response = urllib.request.urlopen(req)
+        result = json.loads(response.read().decode())
+        ''' End reCAPTCHA validation '''
+
+        if not result['success']:
+            return HttpResponse( 'Invalid reCAPTCHA. Please try again.' )
+
         # aca lo autentifico con Django
         user = authenticate( username=username, password=password)
 
@@ -68,7 +88,12 @@ def user_login( request ):
 def user_detail( request ):
 
     # tengo que obtener el UserDetailInfo a partir del user
-    userInfo = UserProfileInfo.objects.get( user=request.user )
+    try:
+        userInfo = UserProfileInfo.objects.get( user=request.user )
+    except UserProfileInfo.DoesNotExist:
+        userInfo = UserProfileInfo()
+        userInfo.user = request.user
+
     return render( request, "user_detail.html", context={ 'user_profile': userInfo } )
 
 @login_required
@@ -76,14 +101,17 @@ def user_edit( request ):
 
     # Este es el form que administra la actualización de datos de un usuario registrado
     # tengo que obtener el UserDetailInfo a partir del user
-    userInfo = UserProfileInfo.objects.get( user=request.user )
-    u = userInfo.user
+    try:
+        userInfo = UserProfileInfo.objects.get( user=request.user )
+    except UserProfileInfo.DoesNotExist:
+        userInfo = UserProfileInfo()
+        userInfo.user = request.user
 
+    u = userInfo.user
 
     if request.method == "POST":
 
         user_form = UserFullForm( request.POST )
-
         if user_form.is_valid() :
 
             u.first_name = user_form.cleaned_data['first_name']
@@ -93,13 +121,12 @@ def user_edit( request ):
             u.save()
 
             # lo retorno a la vista original
-            return HttpResponseRedirect( reverse('user_detail'))
+            return HttpResponseRedirect( reverse('security:user_detail'))
     else:
 
         # este es el GET
         user_form = UserFullForm(
                initial={'first_name': u.first_name, 'last_name': u.last_name, 'email': u.email} )
-
 
     return render( request, "user_edit.html", context={ 'user_form': user_form, 'user_profile': userInfo } )
 
@@ -108,4 +135,4 @@ def user_edit( request ):
 @login_required
 def user_logout( request ):
     logout( request )
-    return HttpResponseRedirect( reverse('views.index'))
+    return HttpResponseRedirect(reverse('views.index'))

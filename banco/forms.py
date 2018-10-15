@@ -1,14 +1,15 @@
 from django import forms
 from banco.models import Transaccion
 
-
-# este form solo lo utilizo para el registro
+# este form lo utilizo para la consulta de transacciones
 class TransaccionForm( forms.ModelForm):
 
     class Meta():
         model = Transaccion
         fields = ( 'cliente', 'fecha', 'tipo' )
-
+        widgets = {
+            'fecha': forms.DateInput(attrs={'class':'datepicker'}),
+        }
 
 
     def __init__(self, *args, **kwargs):

@@ -4,13 +4,15 @@
      <h3>Please Login here</h3>
 
      <div class="container pt-3 w-50 ml-4 " >
-     <form class="form-group" action={% url 'user_login' %} method="post">
+     <form class="form-group" action={% url 'security:user_login' %} method="post">
        {% csrf_token %}
        <label class="form-control" for="username">Username:</label>
        <input class="form-control" type="text" name="username" placeholder="Enter username">
 
        <label class="form-control mt-3" for="password">Password:</label>
        <input class="form-control" type="password" name="password">
+
+       <div class="g-recaptcha pt-3" data-sitekey="6Lfy8HQUAAAAAPTkmU54sMJCF-VetsyIJAgyJmXw"></div>
 
        <input class="btn btn-primary btn-sm mt-3" type="submit" name="" value="Login">
 

@@ -13,11 +13,11 @@
     <p>Este sitio corresponde a dos aplicaciones construidas con Django Framework y Python.
     Se utilizan dos bases de datos: </p>
     <ul>
-      <li><a href="{% url 'AppTwo:users'%}">Clientes</a> (Requiere <a href="{% url 'user_login' %}">login</a>)</li>
+      <li><a href="{% url 'AppTwo:users'%}">Clientes</a> (Requiere <a href="{% url 'security:user_login' %}">login</a>)</li>
       <li><a href="{% url 'school:list'%}">Escuelas</a></li>
     </ul>
-    <p>Se integra el mecanismo de seguridad de Django para <a href="{% url 'user_login' %}">autentificar</a> usuarios
-      y <a href="{% url 'views.register' %}">registrar usuarios nuevos</a></p>
+    <p>Se integra el mecanismo de seguridad de Django para <a href="{% url 'security:user_login' %}">autentificar</a> usuarios
+      y <a href="{% url 'security:register' %}">registrar usuarios nuevos</a></p>
     <p>Octubre, 2018</p>
     </div>
 

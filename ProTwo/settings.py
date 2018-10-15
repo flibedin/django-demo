@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'bootstrap4',
     'AppTwo',
     'school',
-    'banco'
+    'banco',
+    'security'
 ]
 
 MIDDLEWARE = [
@@ -109,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-cl'
 
 TIME_ZONE = 'UTC'
 
@@ -130,3 +131,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
 
 LOGIN_URL = '/user_login'
+
+GOOGLE_RECAPTCHA_SECRET_KEY = '6Lfy8HQUAAAAAOmJnh6oHOYvu0hoGcHAD8lo28uO'

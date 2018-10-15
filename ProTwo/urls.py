@@ -17,25 +17,19 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from AppTwo import views, auth_views
+from AppTwo import views
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path( '', views.index, name='views.index'),
     path( 'users/', include('AppTwo.urls')),
     path( 'school/', include('school.urls')),
     path( 'banco/', include('banco.urls')),
+    path( 'security/', include('security.urls')),
 
-    path('admin/', admin.site.urls),
-    path('register/', auth_views.register, name='views.register'),
-    path('logout/', auth_views.user_logout, name='logout'),
-    path('user_login/', auth_views.user_login, name='user_login'),
-    path('user_detail/', auth_views.user_detail, name='user_detail'),
-    path('user_edit/', auth_views.user_edit, name='user_edit'),
+    # paginas estaticas
     path('empresa/',views.EmpresaView.as_view(),name='empresa'),
     path('productos/',views.ProductosView.as_view(),name='productos'),
-
-
-
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

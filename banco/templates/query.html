@@ -9,7 +9,8 @@
 
  <form class="form-group col-sm-4"  method="post">
    {% csrf_token %}
-   {% bootstrap_form form layout='horizontal' size='small' %}
+
+  {% bootstrap_form form layout='horizontal' size='small' %}
    <div class="container">
      <button type="submit" class="btn btn-primary btn-sm mt-3">Consultar</button>
    </div>
@@ -37,8 +38,12 @@
           <td>{{ t.monto }}</td>
 
         </tr>
+
         {% endfor %}
     </table>
+    {% include '_pagination.html' %}
+
 
 </div>
+
 {% endblock %}

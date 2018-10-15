@@ -1,5 +1,5 @@
 from django.urls import path
-from AppTwo import views, auth_views
+from AppTwo import views
 
 app_name = 'AppTwo'
 
