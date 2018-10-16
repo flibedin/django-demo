@@ -17,6 +17,10 @@ class ClienteList( ListView ):
 # este es un ejemplo de Query en base distintos campos y una grilla paginada con los resultados
 def Query(request):
 
+    transacciones = None
+    paginator = None
+    is_paginated = False
+
     if request.method == 'POST':
         form = TransaccionForm(request.POST)
         if form.is_valid():
@@ -49,7 +53,6 @@ def Query(request):
         page = request.GET.get('page') #  Get the page number
         if page == '' or page == None:
             is_paginated = False
-            transacciones = None
             paginator = None
         else:
             # recupero el objeto serializado con mi dataset desde la sesion

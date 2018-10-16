@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load bootstrap4 %}
+
 {% block body_block %}
 
 <h3>Banco - <small>Consulta de Transacciones </small></h3>
@@ -7,16 +8,30 @@
 
 <div class="container pt-3 " >
 
- <form class="form-group col-sm-4"  method="post">
+ <form class="form-group col-sm-4"  method="post" autocomplete="off">
    {% csrf_token %}
 
-  {% bootstrap_form form layout='horizontal' size='small' %}
+  {% bootstrap_field form.cliente layout="horizontal" %}
+  {% bootstrap_field form.tipo layout="horizontal" %}
+  {% bootstrap_field form.fecha layout="horizontal" %}
+
+  <script>
+  $('#datepicker').datepicker({
+    showButtonPanel: true,
+    dateFormat: "dd/mm/yy",
+    beforeShow: function(){
+           $(".ui-datepicker").css('font-size', 10)
+    }
+  });
+  </script>
+
    <div class="container">
      <button type="submit" class="btn btn-primary btn-sm mt-3">Consultar</button>
    </div>
  </form>
+</div>
 
- </div>
+
 
 
 <div class="container pt-3">

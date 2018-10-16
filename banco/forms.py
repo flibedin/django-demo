@@ -7,9 +7,7 @@ class TransaccionForm( forms.ModelForm):
     class Meta():
         model = Transaccion
         fields = ( 'cliente', 'fecha', 'tipo' )
-        widgets = {
-            'fecha': forms.DateInput(attrs={'class':'datepicker'}),
-        }
+        widgets = {'fecha': forms.DateInput(attrs={'id': 'datepicker'})}
 
 
     def __init__(self, *args, **kwargs):
