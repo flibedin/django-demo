@@ -11,9 +11,12 @@
  <form class="form-group col-sm-4"  method="post" autocomplete="off">
    {% csrf_token %}
 
+   {% bootstrap_form form layout="horizontal" %}
+
+  <!-- Esto se usa en caso de querer reordenar el formulario
   {% bootstrap_field form.cliente layout="horizontal" %}
   {% bootstrap_field form.tipo layout="horizontal" %}
-  {% bootstrap_field form.fecha layout="horizontal" %}
+  {% bootstrap_field form.fecha layout="horizontal" %} -->
 
   <script>
   $('#datepicker').datepicker({
@@ -30,8 +33,6 @@
    </div>
  </form>
 </div>
-
-
 
 
 <div class="container pt-3">

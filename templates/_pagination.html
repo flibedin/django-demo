@@ -2,34 +2,34 @@
   <nav>
     <ul class="pagination">
       {% if page_obj.has_previous %}
-        <li>
-          <a href="?page={{ page_obj.previous_page_number }}">
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
             <span>Previous </span>
           </a>
         </li>
       {% else %}
         <li class="disabled">
-          <a href="#">
+          <a class="page-link" href="#">
             <span>Previous </span>
           </a>
         </li>
       {% endif %}
 
       {% for page in paginator.page_range %}
-        <li {% if page == page_obj.number %}class="active"{% endif %}>
-          <a href="?page={{ page }}"> &nbsp{{ page }}&nbsp</a>
+        <li  {% if page == page_obj.number %} class="page-item active" {% endif %}>
+          <a class="page-link" href="?page={{ page }}"> &nbsp{{ page }}&nbsp</a>
         </li>
       {% endfor %}
 
       {% if page_obj.has_next %}
-        <li>
-          <a href="?page={{ page_obj.next_page_number }}">
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">
             <span> Next</span>
           </a>
         </li>
       {% else %}
-        <li {% if not page_obj.has_next %}class="disabled"{% endif %}>
-          <a href="#">
+        <li {% if not page_obj.has_next %}class="page-item disabled"{% endif %}>
+          <a class="page-link" href="#">
             <span> Next</span>
           </a>
         </li>

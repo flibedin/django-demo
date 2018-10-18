@@ -15,4 +15,3 @@ class TransaccionForm( forms.ModelForm):
         self.fields['cliente'].required = False
         self.fields['fecha'].required = False
         self.fields['tipo'].required = False
-        self.fields['tipo'].widget.attrs.update({'class': 'form-control sm-1'})
