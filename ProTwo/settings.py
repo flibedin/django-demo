@@ -27,7 +27,7 @@ SECRET_KEY = ')$ceq3xtd48v(3&b=1lb!l2=pzx8o3d=l$$r0rkg%gtdsj3pv+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['flibedinsky.pythonanywhere.com', 'localhost']
+ALLOWED_HOSTS = ['flibedinsky.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -130,6 +130,6 @@ STATICFILES_DIRS = ( os.path.join(BASE_DIR, "static"), )
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
 
-LOGIN_URL = '/user_login'
+LOGIN_URL = '/security/user_login'
 
 GOOGLE_RECAPTCHA_SECRET_KEY = '6Lfy8HQUAAAAAOmJnh6oHOYvu0hoGcHAD8lo28uO'

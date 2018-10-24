@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block body_block %}
+
+   <h5>Cliente Bancario</h5>
+   <div class="container pt-3 pb-4 pl-4" >
+
+     <ul class="list-group">
+       <li>Nombre: {{ cliente.nombre }} {{ cliente.apellido }}</li>
+       <li>Direccion: {{ cliente.direccion }}</li>
+       <li>Sucursal: {{ cliente.sucursal.get_choices_display}}</li>
+       <li>Genero: {{ cliente.sexo }}</li>
+     </ul>
+
+   </div>
+
+
+
+
+{% endblock %}

@@ -6,12 +6,19 @@ from banco.models import Cliente, Transaccion
 from banco.forms import TransaccionForm
 from django.core.paginator import Paginator
 from django.core import serializers
+from . import models
+
 
 class ClienteList( ListView ):
     context_object_name = 'clientes'
     template_name = 'cliente_list.html'
     model = Cliente
     paginate_by = 10
+
+class BancoDetailView( DetailView ):
+    context_object_name = 'cliente'
+    model = models.Cliente
+    template_name = 'cliente_detail.html'
 
 
 # este es un ejemplo de Query en base distintos campos y una grilla paginada con los resultados
