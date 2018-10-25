@@ -26,6 +26,10 @@ class BancoTests(TestCase):
         response = self.client.get(reverse('banco:list'))
         self.assertContains(response, 'sigal')
 
+    def test_detail_banco(self):
+        response = self.client.get(reverse('banco:detail', kwargs={'pk': '1'}))
+        self.assertContains(response, 'California')
+
     def test_query_banco(self):
         response = self.client.post(reverse('banco:query'), {'cliente': '1', 'fecha': '', 'tipo': ''})
         self.assertContains(response, '95000')

@@ -35,7 +35,7 @@ def Query(request):
             fecha = form.cleaned_data['fecha']
             tipo = form.cleaned_data['tipo']
 
-            transacciones = Transaccion.objects.all();
+            transacciones = Transaccion.objects.all().order_by('fecha');
 
             if cliente != '' and cliente != None:
                 transacciones = transacciones.filter(cliente=cliente )
@@ -49,9 +49,10 @@ def Query(request):
             # guardo el ibjeto serializado en la sesion
             request.session['query-post'] = serializers.serialize('xml', transacciones)
 
-            paginator = Paginator(transacciones, 5)
-            transacciones = paginator.page(1)
-            is_paginated = True
+            if len(transacciones) > 5 :
+                paginator = Paginator(transacciones, 5)
+                transacciones = paginator.page(1)
+                is_paginated = True
 
     else:   # GET
         form = TransaccionForm()

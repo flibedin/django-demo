@@ -73,7 +73,11 @@ def user_login( request ):
         if user:
             if user.is_active:
                 login( request, user )
-                return HttpResponseRedirect( reverse('views.index'))
+                next = request.GET.get('next')
+                if next != None and next != 'None' and next != '':
+                    return HttpResponseRedirect( next )
+                else:
+                    return HttpResponseRedirect( reverse('views.index'))
             else:
                 return HttpResponse( "LA CUENTA NO ESTA ACTIVA")
         else:
@@ -81,7 +85,8 @@ def user_login( request ):
             print( "Username: {} y Password: {}".format( username, password ))
             return HttpResponse( "Login invalido")
     else:
-        return render( request, "login.html", {})
+        next = request.GET.get( 'next')
+        return render( request, "login.html", {'next': next})
 
 
 @login_required

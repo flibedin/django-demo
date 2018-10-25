@@ -14,6 +14,9 @@ class Cliente(models.Model):
     def __str__(self):
         return "{} {}".format(self.nombre, self.apellido)
 
+    class Meta:
+        ordering = ['nombre']
+
 
 class Transaccion(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
