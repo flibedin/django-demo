@@ -13,6 +13,8 @@ class BancoTests(TestCase):
     # este metodo inicializa los datos para el test
     @classmethod
     def setUpTestData(self):
+
+        # creo una transaccion para todos los tests
         c = Cliente( nombre='sigal', apellido='libedinsky', direccion='California 2537', sucursal='01', sexo='M')
         c.save()
 
@@ -30,6 +32,7 @@ class BancoTests(TestCase):
         response = self.client.get(reverse('banco:detail', kwargs={'pk': '1'}))
         self.assertContains(response, 'California')
 
+
     def test_query_banco(self):
-        response = self.client.post(reverse('banco:query'), {'cliente': '1', 'fecha': '', 'tipo': ''})
+        response = self.client.post(reverse('banco:query'), {'cliente': '1'})
         self.assertContains(response, '95000')

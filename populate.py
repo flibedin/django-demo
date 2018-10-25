@@ -73,6 +73,6 @@ def populate_banco( N = 5, transac = 10 ):
 if __name__ == '__main__':
     print( "Populating data")
     # populate_users(20)
-    # populate_schools(10, 50)
-    populate_banco( 100, 20 )
+    populate_schools(10, 50)
+    # populate_banco( 100, 20 )
     print( "Listo!")
