@@ -22,6 +22,7 @@ class SchoolTests(TestCase):
     def test_school_list(self):
         response = self.client.get(reverse('school:list'))
         self.assertContains(response, 'hebreo')
+        self.assertTemplateUsed(response, 'school_list.html')   # Test del template usado
 
     # testeo la vista de detalle de escuela
     def test_school_detail(self):

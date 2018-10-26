@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.conf import settings
 import json
 import urllib.request
+from django.core.mail import send_mail
 
 
 
@@ -34,6 +35,16 @@ def register( request ):
 
             profile.save()
             registered = True
+
+            # envio mail avisando el registro
+            send_mail(
+                'Nuevo registro en sitio de FL',
+                'Hola, has sido registrado exitosamente en el sitio',
+                'flibedinsky.smtp@gmail.com',
+                [user.email],
+                fail_silently=True )
+
+
         else:
             print( user_form.errors, profile_form.errors)
     else:
@@ -141,3 +152,5 @@ def user_edit( request ):
 def user_logout( request ):
     logout( request )
     return HttpResponseRedirect(reverse('views.index'))
+
+

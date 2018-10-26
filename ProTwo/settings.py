@@ -133,3 +133,12 @@ MEDIA_URL = '/media/'
 LOGIN_URL = '/security/user_login'
 
 GOOGLE_RECAPTCHA_SECRET_KEY = '6Lfy8HQUAAAAAOmJnh6oHOYvu0hoGcHAD8lo28uO'
+
+# Parametros para el envio de emails
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'flibedinsky.smtp@gmail.com'
+EMAIL_HOST_PASSWORD = 'Chile2018$'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

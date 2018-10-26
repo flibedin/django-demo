@@ -23,8 +23,9 @@ class SecurityTests(TestCase):
     # testeo el login_required
     def test_login_required(self):
         # accedo a una pagina protegida para usuarios registrados
-        response = self.client.get(reverse('AppTwo:users'))
-        self.assertRedirects(response, '/security/user_login?next=/users/', fetch_redirect_response=False)
+        response = self.client.get(reverse('AppTwo:users'),  follow=True)
+        self.assertContains(response, 'Login')
+        # self.assertRedirects(response, '/security/user_login?next=/users/', fetch_redirect_response=False)
 
 
     # simulo el login de un usuario y veo si funciona
