@@ -23,10 +23,10 @@ def register( request ):
         if user_form.is_valid() and profile_form.is_valid() :
 
             user = user_form.save()
-            user.set_password( user.password)
+            user.set_password(user.password)
             user.save()
 
-            profile = profile_form.save( commit = False)
+            profile = profile_form.save(commit = False)
             profile.user = user         # lo asocio al user recien grabado
 
             # veo si trae una imagen
@@ -37,12 +37,14 @@ def register( request ):
             registered = True
 
             # envio mail avisando el registro
+            '''
             send_mail(
                 'Nuevo registro en sitio de FL',
                 'Hola, has sido registrado exitosamente en el sitio',
                 'flibedinsky.smtp@gmail.com',
                 [user.email],
                 fail_silently=True )
+            '''
 
 
         else:
@@ -112,11 +114,12 @@ def user_detail( request ):
 
     return render( request, "user_detail.html", context={ 'user_profile': userInfo } )
 
+
+# Este form administra la actualización de datos de un usuario registrado
 @login_required
 def user_edit( request ):
 
-    # Este es el form que administra la actualización de datos de un usuario registrado
-    # tengo que obtener el UserDetailInfo a partir del user
+    # Obtengo el UserInfo a partir del user
     try:
         userInfo = UserProfileInfo.objects.get( user=request.user )
     except UserProfileInfo.DoesNotExist:
@@ -127,8 +130,14 @@ def user_edit( request ):
 
     if request.method == "POST":
 
-        user_form = UserFullForm( request.POST )
-        if user_form.is_valid() :
+        user_form = UserFullForm(request.POST)
+
+        # veo si trae una imagen
+        if 'profile_pic' in request.FILES:
+            userInfo.profile_pic = request.FILES['profile_pic']
+            userInfo.save()
+
+        elif user_form.is_valid():
 
             u.first_name = user_form.cleaned_data['first_name']
             u.last_name = user_form.cleaned_data['last_name']
@@ -140,11 +149,12 @@ def user_edit( request ):
             return HttpResponseRedirect( reverse('security:user_detail'))
     else:
 
-        # este es el GET
+        # este es el GET, debo llenar el user_form con los datos de la BD
         user_form = UserFullForm(
                initial={'first_name': u.first_name, 'last_name': u.last_name, 'email': u.email} )
 
     return render( request, "user_edit.html", context={ 'user_form': user_form, 'user_profile': userInfo } )
+
 
 
 

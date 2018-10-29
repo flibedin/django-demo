@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from AppTwo.models import Cliente
 from AppTwo import views
 from security import views
-
+from security.models import UserProfileInfo
 
 class SecurityTests(TestCase):
 
@@ -45,21 +45,78 @@ class SecurityTests(TestCase):
         login = self.client.login(username='testuser1', password='12345')
 
         response = self.client.get(reverse('security:logout'), follow=True)
-
         self.assertContains(response, 'Login')
 
 
     # simulo el Registro de un nuevo usuario
     def test_registration(self):
-        frm = {'username': 'ana',
-                    'password': 'ana1234',
-                    'email': 'ana@example.com',
-                    'portfolio': '',
-                    'portfolio_pic': '',
-                    }
+
+        frm = {'username': 'ilan',
+                'password': 'ilan1234',
+                'email': 'sigal@example.com',
+                 'portfolio': '',
+                'profile_pic': '',
+                 }
 
         response = self.client.post(reverse('security:register'), data=frm)
         self.assertContains(response, 'Gracias')
+
+        user = User.objects.get(username='ilan')
+        self.assertEquals( user.username, 'ilan')
+        user.set_password('ilan1234')
+        user.save()
+
+        # verifico que pueda logearse
+        login = self.client.login(username='ilan', password='ilan1234')
+        response = self.client.get(reverse('views.index'))
+        self.assertEqual(str(response.context['user']), 'ilan')
+
+
+    # test de actualización de foto
+    def test_photo(self):
+        image = '/Users/fernando/Desktop/sigal1.jpg'
+        with open(image, 'rb') as fp:
+            frm = {'username': 'sigal',
+                   'password': 'sigal1234',
+                   'email': 'sigal@example.com',
+                   'portfolio': '',
+                   'profile_pic': fp,
+                   }
+
+            # registro un nuevo usuario con su foto
+            response = self.client.post(reverse('security:register'), data=frm,  format='multipart')
+
+        self.assertContains(response, 'Registrarse')
+
+        user = User.objects.get(username='sigal')
+
+
+        # me logeo
+        login = self.client.login(username='sigal', password='sigal1234')
+
+        # verifico su perfil, que tenga foto
+        response = self.client.get(reverse('security:user_detail'))
+        self.assertContains(response, 'sigal1')
+
+
+        # cambio la foto
+        with open('/Users/fernando/Desktop/sigal2.jpg', 'rb') as fp:
+            response = self.client.post(reverse('security:user_edit'), data={'profile_pic': fp }, format='multipart')
+
+
+        # verifico el cambio
+        response = self.client.get(reverse('security:user_detail'))
+        self.assertContains(response, 'sigal2')
+
+        # cambio el apellido
+        frm = {'first_name': 'sigal',
+               'last_name': 'libedinsky pardo',
+               'email': 'sigal@example.com',
+                  }
+        response = self.client.post(reverse('security:user_edit'), data=frm, follow=True)
+        self.assertContains(response, 'pardo')
+
+
 
     def test_fail_registration(self):
         frm = {'username': 'ana',

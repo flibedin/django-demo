@@ -6,24 +6,47 @@
 
 {% if user_profile.profile_pic.url != '' and user_profile.profile_pic.url != None %}
      <div class="col-sm-3">
-       <img class="rounded float-left w-50" src="{{ user_profile.profile_pic.url }}" alt="{{ user_profile.user.username }}">
+       <img  id="foto" class="rounded float-left w-50" src="{{ user_profile.profile_pic.url }}" alt="{{ user_profile.user.username }}">
      </div>
+
 {% endif %}
 
-       <div class="col-sm-5">
+       <div class="col-sm-3">
 
-         <form  class="form-group"  method="post">
+         <form  class="form-group" id="target" enctype="multipart/form-data" method="post">
               {% csrf_token %}
               {{ user_form.as_p }}
+              {{ user_profile.as_p }}
+
+
+             <input type="file" class="btn btn-primary btn-sm mt-3" name="profile_pic" style="display:none"; accept="image/*" id="file" />
+
 
              <button type="submit" class="btn btn-primary btn-sm mt-3">Grabar</button>
-
              <input class="btn btn-primary ml-3 mt-3 btn-sm" type=button value="Cancelar" onClick="javascript:history.go(-1);">
          </form>
 
        </div>
 
    </div>
- </div>
+  </div>
+
+
+<script>
+    $('#foto').click(function() {
+         $('#file').click();
+        });
+
+    // gatillo el submit del form para actualizar la nueva foto
+    $('#file').change(function() {
+         $('#target').submit();
+        });
+
+    $('#foto').mouseover(function() {
+         $('#foto').css( 'cursor', 'pointer' );
+        });
+
+</script>
+
 
 {% endblock %}
