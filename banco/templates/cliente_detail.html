@@ -1,17 +1,47 @@
 {% extends "base.html" %}
 {% block body_block %}
 
-   <h5>Cliente Bancario</h5>
+   <h4>Cliente Bancario
+       <a class="btn btn-success ml-5  btn-sm" href="{% url 'banco:hipotecario' pk=pk %}">Hipotecario</a>
+
+    <a class="btn btn-outline-primary ml-5  btn-sm" href="{% url 'banco:cliente_pdf' pk=pk %}">PDF</a>
+    </h4>
+
    <div class="container pt-3 pb-4 pl-4" >
 
      <ul class="list-group">
        <li>Nombre: {{ cliente.nombre }} {{ cliente.apellido }}</li>
        <li>Direccion: {{ cliente.direccion }}</li>
-       <li>Sucursal: {{ cliente.sucursal.get_choices_display}}</li>
-       <li>Genero: {{ cliente.sexo }}</li>
+       <li>Sucursal: {{ cliente.get_sucursal_display}}</li>
+       <li>Genero: {{ cliente.get_sexo_display }}</li>
      </ul>
 
    </div>
+
+    <h5>Transacciones</h5>
+
+    <div class="container  ml-0 col-sm-6">
+    <table class="table table-hover">
+    <thead >
+        <th >Fecha</th>
+        <th >Tipo</th>
+        <th >Monto</th>
+      </thead>
+
+        {% for t in tlist %}
+        <tr>
+            <td>{{ t.fecha|date:"d/m/Y" }}</td>
+          <td>{{ t.get_tipo_display }}</td>
+          <td>{{ t.monto }}</td>
+
+        </tr>
+
+        {% endfor %}
+    </table>
+
+
+</div>
+
 
 
 

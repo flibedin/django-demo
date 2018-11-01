@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% bootstrap_messages %}
+
+{% block body_block %}
+
+<h3>Simulador Hipotecario</h3>
+
+    <div class="container" >
+
+     {% bootstrap_form_errors form %}
+
+    <h5>Cliente</h5>
+        <ul>
+        <li>Nombre: {{ cliente.nombre  }}  {{ cliente.apellido }} </li>
+        <li>Direccion:  {{ cliente.direccion }} </li>
+            <li>Sucursal:  {{ cliente.get_sucursal_display }} </li>
+
+        </ul>
+
+    <form  method="post" autocomplete="off">
+        {% csrf_token %}
+
+
+        <h5>Datos de la Propiedad</h5>
+
+        <div class="row ml-2">
+
+        {% bootstrap_field form.propiedad show_label=False form_group_class="form-check form-check-inline" %}
+        </div>
+        <div class="row pt-3">
+            <div class= "col-sm-4 ml-2">
+
+            {% bootstrap_field form.valor placeholder='Valor de la Propiedad en UF' layout='horizontal'%}
+            </div>
+        </div>
+
+        <h5>Financiamiento</h5>
+
+        <div class="row">
+                <div class="col-sm-3">
+                    {% bootstrap_field form.pie  %}
+                </div>
+                <div class="col-sm-3">
+                 {% bootstrap_field form.credito  %}
+                </div>
+        </div>
+        <div class="row">
+                <div class="col-sm-3">
+                    {% bootstrap_field form.plazo %}
+                </div>
+                <div class="col-sm-3">
+                    {% bootstrap_field form.gracia  %}
+                </div>
+            </div>
+
+        <button type="submit" id="simular" class="btn btn-primary btn-sm mt-3">Simular</button>
+    </form>
+    </div>
+
+<script>
+
+$(document).ready(function(){
+
+    $("#simular").click(function() {
+
+        valor = parseInt($("#id_valor").val())
+        credito = parseInt($("#id_credito").val())
+        pie = parseInt($("#id_pie").val())
+
+        if (valor != credito + pie) {
+            alert("JS: El valor de la propiedad debe ser igual al pie mas el monto del credito");
+            return( false );
+             }
+        else
+            $("form").submit();
+    });
+});
+
+</script>
+{% endblock %}
+

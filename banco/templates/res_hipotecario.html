@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block body_block %}
+
+<h3>Resultado Simulación Hipotecario</h3>
+
+
+    <div class="container" >
+
+    <h5>Cliente</h5>
+        <ul>
+            <li>Nombre: {{ h.cliente.nombre  }}  {{ h.cliente.apellido }} </li>
+            <li>Direccion:  {{ h.cliente.direccion }} </li>
+            <li>Sucursal:  {{ h.cliente.get_sucursal_display }} </li>
+
+        </ul>
+
+        <h5>Financiamiento</h5>
+        <ul>
+            <li>Valor Propiedad: {{ h.valor }} UF</li>
+            <li>Pie: {{ h.pie }} UF</li>
+            <li>Credito: {{ h.credito }} UF</li>
+            <li>Tasa Anual: {{ h.tasa|floatformat:2 }} </li>
+            <li>Cuota Mensual: {{ h.cuota|floatformat:2 }} UF</li>
+        </ul>
+
+        <a class="btn btn-success ml-3  btn-sm" href="{% url 'banco:hipotecario' pk=pk %}">Nueva Simulacion</a>
+
+    </div>
+{% endblock %}

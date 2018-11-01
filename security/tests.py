@@ -86,7 +86,7 @@ class SecurityTests(TestCase):
             # registro un nuevo usuario con su foto
             response = self.client.post(reverse('security:register'), data=frm,  format='multipart')
 
-        self.assertContains(response, 'Registrarse')
+        self.assertContains(response, 'Gracias')
 
         user = User.objects.get(username='sigal')
 
@@ -119,21 +119,20 @@ class SecurityTests(TestCase):
 
 
     def test_fail_registration(self):
-        frm = {'username': 'ana',
+        frm = {'username': 'testuser1',
                'password': '',
                'email': 'ana@example.com',
                'portfolio': '',
                'portfolio_pic': '',
                }
 
-        '''
+        # verifico el caso de usuario ya existente
         response = self.client.post(reverse('security:register'), data=frm)
+        self.assertContains(response, 'Ya existe')
 
-        # verifico que se grabo
-        self.assertContains(response, 'Gracias')
-        '''
-
-
-
+        # usuario sin password
+        frm['username'] = 'fernando2'
+        response = self.client.post(reverse('security:register'), data=frm)
+        self.assertContains(response, 'campo es obligatorio')
 
 
