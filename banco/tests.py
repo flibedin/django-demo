@@ -36,3 +36,21 @@ class BancoTests(TestCase):
     def test_query_banco(self):
         response = self.client.post(reverse('banco:query'), {'cliente': '1'})
         self.assertContains(response, '95000')
+
+    def test_hipotecario(self):
+        frm = {'propiedad': 'D',
+               'valor': '1000',
+               'pie': '200',
+               'credito': '800',
+               'plazo': '10',
+               'gracia': '0',
+               }
+
+        # credito OK
+        response = self.client.post(reverse('banco:hipotecario', kwargs={'pk': '1'}), data=frm)
+        self.assertContains(response, 'Cuota Mensual')
+
+        # formulario incompleto
+        frm['propiedad'] = ''
+        response = self.client.post(reverse('banco:hipotecario', kwargs={'pk': '1'}), data=frm)
+        self.assertContains(response, 'Este campo es obligatorio')

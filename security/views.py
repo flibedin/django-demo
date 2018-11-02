@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.conf import settings
 import json
 import urllib.request
+import os
 from django.core.mail import send_mail
 
 
@@ -134,8 +135,16 @@ def user_edit( request ):
 
         # veo si trae una imagen
         if 'profile_pic' in request.FILES:
+
+            # borro  la imagen antigua
+            old_image = userInfo.profile_pic
             userInfo.profile_pic = request.FILES['profile_pic']
             userInfo.save()
+
+            # borro la imagen antigua
+            filename = os.path.join(settings.MEDIA_ROOT, old_image.name)
+            if os.path.exists(filename):
+                os.remove(filename)
 
         elif user_form.is_valid():
 
