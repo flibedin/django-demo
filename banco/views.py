@@ -76,7 +76,7 @@ def Query(request):
             if tipo != '' and tipo != None :
                 transacciones = transacciones.filter(tipo=tipo)
 
-            # guardo el ibjeto serializado en la sesion
+            # guardo el objeto serializado en la sesion
             request.session['query-post'] = serializers.serialize('xml', transacciones)
 
             if len(transacciones) > 5 :
@@ -141,12 +141,18 @@ def HipotecarioView(request, pk):
                 form.add_error(None, e.message)
                 return render(request, "hipotecario.html", context={'form': form, 'cliente': clt})
 
-
+            # Guardo el objeto en sesión por si quiere simular de nuevo
+            request.session['sim-hipo'] = h.id
 
             # despliego el resultado
             return render(request, "res_hipotecario.html", {'h': h, 'pk': pk })
     else:
-        form = HipotecarioForm()
+        try:
+            h = Hipotecario.objects.get(id=request.session['sim-hipo'])
+            form = HipotecarioForm( instance=h )
+        except (KeyError, Card.DoesNotExist):
+            form = HipotecarioForm()
+
 
     context = {'form': form , 'cliente': clt}
 

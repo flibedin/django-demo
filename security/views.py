@@ -137,14 +137,12 @@ def user_edit( request ):
         if 'profile_pic' in request.FILES:
 
             # borro  la imagen antigua
-            old_image = userInfo.profile_pic
+            userInfo.profile_pic.delete()
+
+            # agrego la nueva
             userInfo.profile_pic = request.FILES['profile_pic']
             userInfo.save()
 
-            # borro la imagen antigua
-            filename = os.path.join(settings.MEDIA_ROOT, old_image.name)
-            if os.path.exists(filename):
-                os.remove(filename)
 
         elif user_form.is_valid():
 
