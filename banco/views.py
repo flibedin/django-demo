@@ -142,15 +142,19 @@ def HipotecarioView(request, pk):
                 return render(request, "hipotecario.html", context={'form': form, 'cliente': clt})
 
             # Guardo el objeto en sesión por si quiere simular de nuevo
-            request.session['sim-hipo'] = h.id
+            request.session['sim-hipo' + '-' + str(clt.id)] = h.id
 
             # despliego el resultado
             return render(request, "res_hipotecario.html", {'h': h, 'pk': pk })
     else:
+        # si tengo objeto en sesion recupero la simulación anterior.
         try:
-            h = Hipotecario.objects.get(id=request.session['sim-hipo'])
-            form = HipotecarioForm( instance=h )
-        except (KeyError, Card.DoesNotExist):
+            h = Hipotecario.objects.get(id=request.session['sim-hipo' + '-' + str(clt.id)])
+            if h.cliente == clt:
+                form = HipotecarioForm( instance=h )
+            else:
+                form = HipotecarioForm()
+        except (KeyError, Hipotecario.DoesNotExist):
             form = HipotecarioForm()
 
 
