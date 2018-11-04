@@ -14,8 +14,7 @@ from django.urls import reverse
 from django import forms
 from django.contrib import messages
 from django.core.exceptions import ValidationError
-
-
+import json
 
 class ClienteList( ListView ):
     context_object_name = 'clientes'
@@ -76,8 +75,11 @@ def Query(request):
             if tipo != '' and tipo != None :
                 transacciones = transacciones.filter(tipo=tipo)
 
-            # guardo el objeto serializado en la sesion
+            # guardo el objeto serializado en la sesion, para poder paginarlo
             request.session['query-post'] = serializers.serialize('xml', transacciones)
+
+            # guardo el query form en la sesion
+            request.session['query-form'] = json.dumps( form.data )
 
             if len(transacciones) > 5 :
                 paginator = Paginator(transacciones, 5)
@@ -85,15 +87,17 @@ def Query(request):
                 is_paginated = True
 
     else:   # GET
-        form = TransaccionForm()
 
-        # preparo el paginador
+        # veo si es un GET proveniente de query anterior (paginado) o nuevo
         page = request.GET.get('page') #  Get the page number
         if page == '' or page == None:
             is_paginated = False
             paginator = None
+
+            # parto con un query form limpio
+            form = TransaccionForm()
         else:
-            # recupero el objeto serializado con mi dataset desde la sesion
+            # recupero las transacciones desde el objeto serializado en sesion
             transacciones = []
             for obj in serializers.deserialize("xml", request.session['query-post']):
                 transacciones.append( obj.object )
@@ -102,6 +106,10 @@ def Query(request):
             paginator = Paginator(transacciones, 5)
             transacciones = paginator.page(page)
             is_paginated = True
+
+            # recupero de la sesion las opciones ya marcadas en el query form
+            f = json.loads(request.session['query-form'])
+            form = TransaccionForm(None, initial=f)
 
     # despliego el form y grilla de resultados
     context = { 'form': form, 'txs': transacciones, 'is_paginated': is_paginated,
@@ -141,13 +149,13 @@ def HipotecarioView(request, pk):
                 form.add_error(None, e.message)
                 return render(request, "hipotecario.html", context={'form': form, 'cliente': clt})
 
-            # Guardo el objeto en sesión por si quiere simular de nuevo
+            # Guardo el ID del cliente en sesión por si quiere simular de nuevo
             request.session['sim-hipo' + '-' + str(clt.id)] = h.id
 
             # despliego el resultado
             return render(request, "res_hipotecario.html", {'h': h, 'pk': pk })
     else:
-        # si tengo objeto en sesion recupero la simulación anterior.
+        # si tengo  sesion al client_id lo recupero de la simulación anterior.
         try:
             h = Hipotecario.objects.get(id=request.session['sim-hipo' + '-' + str(clt.id)])
             if h.cliente == clt:
@@ -155,7 +163,7 @@ def HipotecarioView(request, pk):
             else:
                 form = HipotecarioForm()
         except (KeyError, Hipotecario.DoesNotExist):
-            form = HipotecarioForm()
+            form = HipotecarioForm()        # parto con un form limpio
 
 
     context = {'form': form , 'cliente': clt}
