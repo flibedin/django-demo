@@ -1,6 +1,8 @@
 # Full Django framework demo
 
 Este sitio es un demo de un sitio web construido con Django.
+Lo utilice para aprender Django en Septiembre, 2018
+
 El sitio utiliza un template base con un barra de navegación dinamica
 e incluye las siguientes aplicaciones:
 
